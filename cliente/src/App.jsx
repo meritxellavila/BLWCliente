@@ -1,33 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 
+import { Routes, Route } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import AñadirReceta from './pages/AñadirReceta';
+import CerrarSesion from './pages/CerrarSesion';
+import DetallesReceta from './pages/DetallesReceta';
+import EditarReceta from './pages/EditarReceta';
+import Favoritos from './pages/Favoritos';
+import HomePage from './pages/HomePage';
+import IniciarSesion from './pages/IniciarSesion';
+import Registro from './pages/Registro';
+import NotFound from './pages/NotFound';
+import ServerError from './pages/ServerError';
+import Error from './pages/Error';
+import Buscador from './components/Buscador';
+
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      <Buscador />
+
+      <Routes>
+      <Route path={"/AñadirReceta"} element={<AñadirReceta />} />
+      <Route path={"/CerrarSesion"} element={<CerrarSesion />} />
+      <Route path={"/DetallesReceta"} element={<DetallesReceta />} />
+      <Route path={"/EditarReceta"} element={<EditarReceta />} />
+      <Route path={"/Favoritos"} element={<Favoritos />} />
+      <Route path={"/"} element={<HomePage />} />
+      <Route path={"/IniciarSesion"} element={<IniciarSesion />} />
+      <Route path={"/Registro"} element={<Registro />} />
+      
+
+      <Route path={"/*"} element={<NotFound />} />
+      <Route path={"/ServerError"} element={<ServerError />} />
+      <Route path={"/error"} element={<Error />} />
+      
+      </Routes>
     </>
   )
 }
