@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { Container, Form, FloatingLabel, Button } from 'react-bootstrap';
 import axios from 'axios';
 
-function IniciarSesion() {
+import { Form, Button, Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const API_URL = import.meta.env.VITE_SERVER_URL;
+
+function Registro() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleName = (event) => {
     let inputName = event.target.value;
@@ -32,12 +36,12 @@ function IniciarSesion() {
         password: password,
       };
 
-      const response = await axios.post(`${API_URL}/login`, newUsuario);
+      const response = await axios.post(`${API_URL}/api/auth/signup`, newUsuario);
       console.log(response);
 
-      setName("");
-      setEmail("");
-      setPassword("");
+      setName('');
+      setEmail('');
+      setPassword('');
     } catch (error) {
       console.error(error);
     }
@@ -45,10 +49,11 @@ function IniciarSesion() {
 
   return (
     <Container>
-      <h1>Iniciar sesión</h1>
+      <h2>Registrarse</h2>
+
       <Form onSubmit={handleSubmit}>
         <FloatingLabel controlId="floatingInputName" label="Nombre:" className="mb-3">
-          <Form.Control type="text" value={name} onChange={handleName} />
+          <Form.Control type="name" value={name} onChange={handleName} />
         </FloatingLabel>
 
         <FloatingLabel controlId="floatingInputEmail" label="Email:" className="mb-3">
@@ -60,12 +65,11 @@ function IniciarSesion() {
         </FloatingLabel>
 
         <Button variant="primary" size="lg" type="submit">
-          Iniciar Sesión
+          Registrar
         </Button>
       </Form>
     </Container>
   );
 }
 
-export default IniciarSesion;
-
+export default Registro;

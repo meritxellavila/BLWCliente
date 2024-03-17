@@ -5,16 +5,15 @@ import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import AñadirReceta from './pages/AñadirReceta';
-import CerrarSesion from './pages/CerrarSesion';
 import DetallesReceta from './pages/DetallesReceta';
 import EditarReceta from './pages/EditarReceta';
 import Favoritos from './pages/Favoritos';
 import HomePage from './pages/HomePage';
-import IniciarSesion from './pages/IniciarSesion';
-import Registro from './pages/Registro';
-import NotFound from './pages/NotFound';
-import ServerError from './pages/ServerError';
-import Error from './pages/Error';
+import IniciarSesion from './pages/auth/IniciarSesion';
+import Registro from './pages/auth/Registro';
+import NotFound from './pages/error/NotFound';
+import ServerError from './pages/error/ServerError';
+import Error from './pages/error/Error';
 import Buscador from './components/Buscador';
 
 function App() {
@@ -24,17 +23,18 @@ function App() {
     <>
       <Navbar />
       <Buscador />
+     <br/>
+     <hr/>
 
       <Routes>
       <Route path={"/AñadirReceta"} element={<AñadirReceta />} />
-      <Route path={"/CerrarSesion"} element={<CerrarSesion />} />
       <Route path={"/DetallesReceta"} element={<DetallesReceta />} />
       <Route path={"/EditarReceta"} element={<EditarReceta />} />
       <Route path={"/Favoritos"} element={<Favoritos />} />
       <Route path={"/"} element={<HomePage />} />
       <Route path={"/IniciarSesion"} element={<IniciarSesion />} />
       <Route path={"/Registro"} element={<Registro />} />
-      
+      <Route path={"/private-pages"} element={<Private-pages />} />
 
       <Route path={"/*"} element={<NotFound />} />
       <Route path={"/ServerError"} element={<ServerError />} />

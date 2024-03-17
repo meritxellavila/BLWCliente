@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
+import { Container, Form, FloatingLabel, Button } from 'react-bootstrap';
 import axios from 'axios';
-import API_URL from '../utils/api';
-import { Form, Button, Container } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
-function Registro() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function IniciarSesion() {
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleName = (event) => {
     let inputName = event.target.value;
@@ -25,7 +23,7 @@ function Registro() {
     setPassword(inputPassword);
   };
 
-  const handleSubmit = async (event) => {
+  const handleIniciarSesion = async (event) => {
     event.preventDefault();
     try {
       const newUsuario = {
@@ -34,12 +32,12 @@ function Registro() {
         password: password,
       };
 
-      const response = await axios.post(`${API_URL}/usuario`, newUsuario);
+      const response = await axios.post(`${API_URL}/login`, newUsuario);
       console.log(response);
 
-      setName('');
-      setEmail('');
-      setPassword('');
+      setName("");
+      setEmail("");
+      setPassword("");
     } catch (error) {
       console.error(error);
     }
@@ -47,8 +45,7 @@ function Registro() {
 
   return (
     <Container>
-      <h2>Registrarse</h2>
-
+      <h1>Iniciar sesión</h1>
       <Form onSubmit={handleSubmit}>
         <FloatingLabel controlId="floatingInputName" label="Nombre:" className="mb-3">
           <Form.Control type="text" value={name} onChange={handleName} />
@@ -63,11 +60,12 @@ function Registro() {
         </FloatingLabel>
 
         <Button variant="primary" size="lg" type="submit">
-          Registrarse
+          Iniciar Sesión
         </Button>
       </Form>
     </Container>
   );
 }
 
-export default Registro;
+export default IniciarSesion;
+
