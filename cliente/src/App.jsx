@@ -29,15 +29,18 @@ function App() {
      <hr/>
 
       <Routes>
-      <Route path={"/AñadirReceta"} element={<AñadirReceta />} />
+      {/* <Route path={"/AñadirReceta"} element={<AñadirReceta />} /> */}
       <Route path={"/DetallesReceta"} element={<DetallesReceta />} />
-      <Route path={"/EditarReceta"} element={<EditarReceta />} />
-      <Route path={"/Favoritos"} element={<Favoritos />} />
+      {/* <Route path={"/EditarReceta"} element={<EditarReceta />} /> */}
+      {/* <Route path={"/Favoritos"} element={<Favoritos />} /> */}
       <Route path={"/"} element={<HomePage />} />
       <Route path={"/IniciarSesion"} element={<IniciarSesion />} />
       <Route path={"/Registro"} element={<Registro />} />
       <Route path={"/Private-pages"} element={<IsPrivate>
               <PrivatePages />
+              <AñadirReceta />
+              <EditarReceta />
+              <Favoritos />
             </IsPrivate>} />
 
       <Route path={"/*"} element={<NotFound />} /> //404
