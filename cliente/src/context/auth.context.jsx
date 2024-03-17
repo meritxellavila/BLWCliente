@@ -41,7 +41,8 @@ function AuthWrapper(props) {
     loggedUserId,
     authenticateUser
   }
-
+  
+ //ciclo de vida
   useEffect(() => {
     authenticateUser()
   }, [])
