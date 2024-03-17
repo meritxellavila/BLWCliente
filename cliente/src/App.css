@@ -1,5 +1,6 @@
 #root {
   text-align: center;
+  padding-top: 30px;
 }
 
 body {
@@ -26,36 +27,20 @@ hr {
   font-weight: bold;
 }
 
-.dark-page {
-  background-color: rgb(44, 44, 44);
-  color: whitesmoke;
-  min-height: 100vh;
-}
-
-.light-page {
-  background-color: rgb(255, 240, 240);
-  color: rgb(44, 44, 44);;
-  min-height: 100vh;
-}
 
 nav {
-  padding-top: 20px;
+  padding-top: 20px;  
 }
 
 nav button {
   margin-bottom: 10px;
+}
+nav svg {
+  width: 20px;
+  height: 20px;
 }
 
 button {
   padding: 6px;
 }
 
-.dark-btn {
-  background-color: rgb(120, 120, 120);
-  color: darkgoldenrod
-}
-
-.light-btn {
-  background-color: rgb(172, 172, 172);
-  color: brown;
-}

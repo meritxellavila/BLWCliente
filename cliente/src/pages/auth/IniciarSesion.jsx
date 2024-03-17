@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
-import { Container, Form, FloatingLabel, Button } from 'react-bootstrap';
-import axios from 'axios';
+import React, { useState, useContext } from "react";
+import { Container, Form, FloatingLabel, Button } from "react-bootstrap";
+import axios from "axios";
+import {AuthContext} from "../../context/auth.context"
+
+import { useNavigate } from "react-router-dom";
 
 function IniciarSesion() {
+
+  const { authenticateUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -23,21 +30,28 @@ function IniciarSesion() {
     setPassword(inputPassword);
   };
 
-  const handleIniciarSesion = async (event) => {
+  const handleSubmit= async (event) => {
     event.preventDefault();
+
+    const credentials = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
     try {
-      const newUsuario = {
-        name: name,
-        email: email,
-        password: password,
-      };
+      // 1. validar credenciales del usuario
+      const response = await axios.post(`http://localhost:5005/api/auth/login`, credentials);
 
-      const response = await axios.post(`${API_URL}/login`, newUsuario);
-      console.log(response);
+      // 2. almacenamos el token de forma segura en localStorage
+      localStorage.setItem("authToken", response.data.authToken);
 
-      setName("");
-      setEmail("");
-      setPassword("");
+      // 3. validar el Token y actualizar los estados de auth del usuario
+      await authenticateUser();
+
+      // 4 redireccionar a pagina privada
+      navigate("/private-pages");
+
     } catch (error) {
       console.error(error);
     }
@@ -47,16 +61,32 @@ function IniciarSesion() {
     <Container>
       <h1>Iniciar sesión</h1>
       <Form onSubmit={handleSubmit}>
-        <FloatingLabel controlId="floatingInputName" label="Nombre:" className="mb-3">
+        <FloatingLabel
+          controlId="floatingInputName"
+          label="Nombre:"
+          className="mb-3"
+        >
           <Form.Control type="text" value={name} onChange={handleName} />
         </FloatingLabel>
 
-        <FloatingLabel controlId="floatingInputEmail" label="Email:" className="mb-3">
+        <FloatingLabel
+          controlId="floatingInputEmail"
+          label="Email:"
+          className="mb-3"
+        >
           <Form.Control type="email" value={email} onChange={handleEmail} />
         </FloatingLabel>
 
-        <FloatingLabel controlId="floatingInputPassword" label="Password:" className="mb-3">
-          <Form.Control type="password" value={password} onChange={handlePassword} />
+        <FloatingLabel
+          controlId="floatingInputPassword"
+          label="Password:"
+          className="mb-3"
+        >
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={handlePassword}
+          />
         </FloatingLabel>
 
         <Button variant="primary" size="lg" type="submit">
@@ -68,4 +98,3 @@ function IniciarSesion() {
 }
 
 export default IniciarSesion;
-
