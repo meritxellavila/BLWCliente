@@ -40,7 +40,7 @@ function App() {
               <PrivatePages />
               <AñadirReceta />
               <EditarReceta />
-              <Favoritos />
+              <Favoritos /> 
             </IsPrivate>} />
 
       <Route path={"/*"} element={<NotFound />} /> //404
