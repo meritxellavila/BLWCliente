@@ -44,3 +44,7 @@ button {
   padding: 6px;
 }
 
+.logout-button{
+  border: none;
+  background: none;
+}

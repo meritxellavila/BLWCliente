@@ -23,7 +23,7 @@ function PrivatePages() {
       
       console.log(response)
       setDataPrivada(response.data)
-
+s
     } catch (error) {
       console.log(error) // navigate o algo
     }
