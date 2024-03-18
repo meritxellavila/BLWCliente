@@ -29,9 +29,9 @@ function App() {
      <hr/>
 
       <Routes>
-      {/* <Route path={"/AñadirReceta"} element={<AñadirReceta />} /> */}
-      <Route path={"/DetallesReceta"} element={<DetallesReceta />} />
-      {/* <Route path={"/EditarReceta"} element={<EditarReceta />} /> */}
+      <Route path={"/AñadirReceta"} element={<AñadirReceta />} />
+      <Route path={"/DetallesReceta/:recetasId"} element={<DetallesReceta />} />
+      <Route path={"/EditarReceta/:recetasId"} element={<EditarReceta />} />
       {/* <Route path={"/Favoritos"} element={<Favoritos />} /> */}
       <Route path={"/"} element={<HomePage />} />
       <Route path={"/IniciarSesion"} element={<IniciarSesion />} />
@@ -39,6 +39,7 @@ function App() {
       <Route path={"/Private-pages"} element={<IsPrivate>
               <PrivatePages />
               <AñadirReceta />
+              <DetallesReceta />
               <EditarReceta />
               <Favoritos /> 
             </IsPrivate>} />

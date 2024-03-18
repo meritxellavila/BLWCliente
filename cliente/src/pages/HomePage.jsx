@@ -19,6 +19,7 @@ function HomePage() {
       return "link-inactive";
     }
   };
+  
 
   useEffect(() => {
     axios
@@ -36,23 +37,21 @@ function HomePage() {
 
   return (
     <div>
-      <h1 className="mt-4 mb-4">BLW</h1>
+      <h1 className="text-center mb-4 mt-4" >En HomePage</h1>
+
       <Container>
         <Row xs={1} md={2} lg={3} xl={4}>
-        {allRecetas.map((receta) => (
-                  <Col key={receta.id}>
+        {allRecetas.map((recipe) => (
+                  <Col key={recipe._id}>
                       <Card className="mb-3" style={{ width: "100%" }}>
-                    <Card.Img variant="top" src={receta.imagen} />
+                    <Card.Img variant="top" src={recipe.imagen} />
                     <Card.Body>
                       <Card.Title>
-                        <h2>{receta.nombre}</h2>
+                        <h2>{recipe.nombre}</h2>
                       </Card.Title>
                     </Card.Body>
                     <Card.Body>
-                      <Card.Text>{receta.creadoPor}</Card.Text>
-                    </Card.Body>
-                    <Card.Body>
-                       {isLoggedIn === false ?  (<NavLink to={`/IniciarSesion`}>Ver detalles</NavLink>) :  isLoggedIn === true && (<NavLink to={`/DetallesReceta/${receta.id}`}>Ver Detalles</NavLink>)} 
+                       {isLoggedIn === false ?  (<NavLink to={`/IniciarSesion`}>Ver detalles</NavLink>) :  isLoggedIn === true && (<NavLink to={`/DetallesReceta/${recipe._id}`}>Ver Detalles</NavLink>)} 
                     </Card.Body>     
                     </Card>               
                   </Col>  ))}
