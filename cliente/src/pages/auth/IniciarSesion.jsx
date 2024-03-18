@@ -59,7 +59,7 @@ function IniciarSesion() {
 
   return (
     <Container>
-      <h1>Iniciar sesión</h1>
+      <h2 className="mt-4 mb-4">Iniciar sesión</h2>
       <Form onSubmit={handleSubmit}>
         <FloatingLabel
           controlId="floatingInputName"
@@ -89,7 +89,7 @@ function IniciarSesion() {
           />
         </FloatingLabel>
 
-        <Button variant="primary" size="lg" type="submit">
+        <Button className="mt-4 mb-4" variant="success" size="lg" type="submit">
           Iniciar Sesión
         </Button>
       </Form>

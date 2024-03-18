@@ -64,29 +64,30 @@ function Registro() {
   };
 
   return (
-  <Container style={{ backgroundColor: 'orange', padding: '20px', borderRadius: '10px' }}>
-  <h2 style={{ color: 'green' }}>Registrarse</h2>
-
-  <Form onSubmit={handleSubmit}>
-    <FloatingLabel controlId="floatingInputName" label="Nombre:" className="mb-3">
-      <Form.Control type="name" value={name} onChange={handleName} style={{ borderColor: 'green' }} />
-    </FloatingLabel>
-
-    <FloatingLabel controlId="floatingInputEmail" label="Email:" className="mb-3">
-      <Form.Control type="email" value={email} onChange={handleEmail} style={{ borderColor: 'green' }} />
-    </FloatingLabel>
-
-    <FloatingLabel controlId="floatingInputPassword" label="Password:" className="mb-3">
-      <Form.Control type="password" value={password} onChange={handlePassword} style={{ borderColor: 'green' }} />
-    </FloatingLabel>
-
-    <p style={{ color: 'red' }}>{errorMessage}</p>
-
-    <Button variant="success" size="lg" type="submit">
-      Registrar
-    </Button>
-  </Form>
-</Container>
+    <Container>
+    <h2 className="mt-4 mb-4">Registrarse</h2>
+  
+    <Form onSubmit={handleSubmit}>
+      <FloatingLabel controlId="floatingInputName" label="Nombre:" className="mb-3">
+        <Form.Control type="name" value={name} onChange={handleName} />
+      </FloatingLabel>
+  
+      <FloatingLabel controlId="floatingInputEmail" label="Email:" className="mb-3">
+        <Form.Control type="email" value={email} onChange={handleEmail} />
+      </FloatingLabel>
+  
+      <FloatingLabel controlId="floatingInputPassword" label="Password:" className="mb-3">
+        <Form.Control type="password" value={password} onChange={handlePassword} />
+      </FloatingLabel>
+  
+      <p>{errorMessage}</p>
+  
+      <Button className="mt-4 mb-4" variant="success" size="lg" type="submit">
+        Registrar
+      </Button>
+    </Form>
+  </Container>
+  
   );
 }
 
