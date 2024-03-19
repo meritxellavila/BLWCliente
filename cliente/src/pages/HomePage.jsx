@@ -30,9 +30,19 @@ function HomePage() {
       <h1 className="text-center mb-4 mt-4">En HomePage</h1>
 
       <Container>
+        <h2>¿Qué es el método BLW?</h2>
+        <h4>
+          El método BLW, o Baby-Led Weaning, es una técnica de alimentación
+          complementaria que consiste en permitir que el bebé se alimente por sí
+          mismo desde el principio de su introducción a los alimentos sólidos.
+          En lugar de ofrecer purés, se ofrecen alimentos sólidos en trozos o
+          tiras para que el bebé pueda agarrarlos y llevarlos a la boca.
+        </h4>
         <Row>
           <Col>
-            <Carousel interval={2000}> {/* intervalo de 3 segundos */}
+            <Carousel interval={2000}>
+              {" "}
+              {/* intervalo de 3 segundos */}
               {allRecetas.map((recipe) => (
                 <Carousel.Item key={recipe._id}>
                   <img
@@ -44,9 +54,23 @@ function HomePage() {
                     <h3>{recipe.nombre}</h3>
                     <p>{recipe.descripcion}</p>
                     {isLoggedIn === false ? (
-                     <NavLink to={`/IniciarSesion`} style={{ fontSize:"xxx-large",  fontWeight: "bold" }}>Ver detalles</NavLink>
+                      <NavLink
+                        to={`/IniciarSesion`}
+                        style={{ fontSize: "xxx-large", fontWeight: "bold" }}
+                      >
+                        Ver detalles
+                      </NavLink>
                     ) : (
-                      <NavLink to={`/DetallesReceta/${recipe._id}`} style={{ fontSize: "2rem", color: "brown",  fontWeight: "bold"}}>Ver Detalles</NavLink>
+                      <NavLink
+                        to={`/DetallesReceta/${recipe._id}`}
+                        style={{
+                          fontSize: "2rem",
+                          color: "brown",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Ver Detalles
+                      </NavLink>
                     )}
                   </Carousel.Caption>
                 </Carousel.Item>
