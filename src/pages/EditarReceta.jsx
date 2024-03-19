@@ -17,21 +17,6 @@ function EditarReceta() {
     const [ingredientes, setIngredientes] = useState("");
     const [creadoPor, setCreadoPor] = useState("");
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:5005/api/porReceta/${recetasId}`)
-            .then((response) => {
-                const recetaData = response.data;
-                setNombre(recetaData.nombre);
-                setPasos(recetaData.pasos);
-                setImagen(recetaData.imagen);
-                setIngredientes(recetaData.ingredientes);
-                setCreadoPor(recetaData.creadoPor); // Asegúrate de que la propiedad sea minúscula, coincide con tu modelo en el backend
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, [recetasId]);
 
     const handleNombre = (event) => {
         let inputNombre = event.target.value;
@@ -62,8 +47,27 @@ function EditarReceta() {
         setCreadoPor(inputCreadoPor);
     };
 
+    useEffect(() => {
+        axios
+            .get(`http://localhost:5005/api/porReceta/${recetasId}`)
+            .then((response) => {
+                console.log(response);
+                
+                const recetaData = response.data;
+                setNombre(recetaData.nombre);
+                setPasos(recetaData.pasos);
+                setImagen(recetaData.imagen);
+                setIngredientes(recetaData.ingredientes);
+                setCreadoPor(recetaData.creadoPor); 
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, [recetasId]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+
         try {
             await axios.put(`http://localhost:5005/api/porReceta/${recetasId}`, {
                 nombre: nombre,
@@ -72,10 +76,9 @@ function EditarReceta() {
                 ingredientes: ingredientes,
                 creadoPor: creadoPor,
             });
-            // Redirige a la página de detalles de la receta u otra página
-            navigate(`/recetas/${recetasId}`);
+            navigate(`/DetallesReceta/${recetasId}`);
         } catch (error) {
-            console.error(error);
+            navigate("/*") 
         }
     };
 

@@ -42,7 +42,6 @@ function HomePage() {
           <Col>
             <Carousel interval={2000}>
               {" "}
-              {/* intervalo de 3 segundos */}
               {allRecetas.map((recipe) => (
                 <Carousel.Item key={recipe._id}>
                   <img
