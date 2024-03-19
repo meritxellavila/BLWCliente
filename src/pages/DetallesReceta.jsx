@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Toast } from "react-bootstrap";
+import AñadirComentario from "../components/AñadirOpiniones";
 
 function DetallesReceta() {
   const navigate = useNavigate();
@@ -73,6 +74,9 @@ function DetallesReceta() {
                       </li>
                     ))}
                   </ol>
+                </Card.Body>
+                <Card.Body>
+                  <AñadirComentario />
                 </Card.Body>
                 <Container className="d-flex justify-content-between">
                   <Button

@@ -42,6 +42,7 @@ function HomePage() {
           <Col>
             <Carousel interval={2000}>
               {" "}
+
               {allRecetas.map((recipe) => (
                 <Carousel.Item key={recipe._id}>
                   <img

@@ -25,13 +25,13 @@ function App() {
       <hr />
 
       <Routes>
-        <Route path={"/AñadirReceta"} element={<AñadirReceta />} />
+         {/* <Route path={"/AñadirReceta"} element={<AñadirReceta />} />
         <Route
           path={"/DetallesReceta/:recetasId"}
           element={<DetallesReceta />}
         />
         <Route path={"/EditarReceta/:recetasId"} element={<EditarReceta />} />
-        {/* <Route path={"/Favoritos"} element={<Favoritos />} /> */}
+        <Route path={"/Favoritos"} element={<Favoritos />} /> */}
         <Route path={"/"} element={<HomePage />} />
         <Route path={"/IniciarSesion"} element={<IniciarSesion />} />
         <Route path={"/Registro"} element={<Registro />} />
@@ -43,41 +43,74 @@ function App() {
             </IsPrivate>
           }
         />
-        <Route
-          path={"/Private-pages"}
-          element={
-            <IsPrivate>
-              {" "}
-              <AñadirReceta />
-            </IsPrivate>
-          }
-        />
-        <Route
-          path={"/Private-pages"}
+         <Route
+          path={"/DetallesReceta/:recetasId"}
           element={
             <IsPrivate>
               <DetallesReceta />
             </IsPrivate>
           }
         />
-        <Route
-          path={"/Private-pages"}
+         <Route
+          path={"/EditarReceta/:recetasId"}
           element={
             <IsPrivate>
-              {" "}
               <EditarReceta />
             </IsPrivate>
           }
         />
-        <Route
-          path={"/Private-pages"}
+
+      <Route
+          path={"/Favoritos"}
           element={
             <IsPrivate>
-              {" "}
               <Favoritos />
             </IsPrivate>
           }
         />
+
+        <Route
+          path={"/AñadirReceta"}
+          element={
+            <IsPrivate>
+              <AñadirReceta />
+            </IsPrivate>
+          }
+        />
+        
+        {/* <Route
+          path={"/AñadirReceta"}
+          element={
+            <IsPrivate>
+              <AñadirReceta />
+            </IsPrivate>
+          }
+        /> */}
+        {/* <Route
+          path={"/DetallesReceta "}
+          element={
+            <IsPrivate>
+              <DetallesReceta />
+            </IsPrivate>
+          }
+        /> */}
+        {/* <Route
+          path={"/EditarReceta"}
+          element={
+            <IsPrivate>
+            
+              <EditarReceta />
+            </IsPrivate>
+          }
+        /> */}
+        {/* <Route
+          path={"/Favoritos"}
+          element={
+            <IsPrivate>
+              <Favoritos />
+            </IsPrivate>
+          }
+        /> */}
         <Route path={"/*"} element={<NotFound />} /> //404
         <Route path={"/ServerError"} element={<ServerError />} /> //500
       </Routes>

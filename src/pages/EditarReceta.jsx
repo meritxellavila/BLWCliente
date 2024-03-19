@@ -7,6 +7,8 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import service from '../services/config.services';
+
 
 function EditarReceta() {
     const navigate = useNavigate();
@@ -48,8 +50,7 @@ function EditarReceta() {
     };
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:5005/api/porReceta/${recetasId}`)
+        service.get(`http://localhost:5005/api/recetas/${recetasId}`)
             .then((response) => {
                 console.log(response);
                 
@@ -69,12 +70,13 @@ function EditarReceta() {
         event.preventDefault();
 
         try {
-            await axios.put(`http://localhost:5005/api/porReceta/${recetasId}`, {
+           await service.put(`http://localhost:5005/api/recetas/porReceta/${recetasId}`, {
                 nombre: nombre,
                 imagen: imagen,
                 pasos: pasos,
                 ingredientes: ingredientes,
                 creadoPor: creadoPor,
+                
             });
             navigate(`/DetallesReceta/${recetasId}`);
         } catch (error) {

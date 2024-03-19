@@ -23,7 +23,7 @@ function PrivatePages() {
       
       console.log(response)
       setDataPrivada(response.data)
-s
+
     } catch (error) {
       console.log(error) // navigate o algo
     }
@@ -42,6 +42,7 @@ s
       <p>Solo usuarios que hayan validado credenciales deberian poder acceder</p>
 
       {dataPrivada.data}
+      
 
     </div>
   )
