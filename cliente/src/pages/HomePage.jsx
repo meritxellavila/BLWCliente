@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, NavLink } from "react-router-dom";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import { Card, Button, Container, Row, Col, Carousel } from "react-bootstrap";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 
@@ -12,21 +12,11 @@ function HomePage() {
 
   const { authenticateUser, isLoggedIn } = useContext(AuthContext);
 
-  const homeChek = (navInfo) => {
-    if (homeInfo.isActive === true) {
-      return "link-active";
-    } else {
-      return "link-inactive";
-    }
-  };
-  
-
   useEffect(() => {
     axios
       .get(`http://localhost:5005/api/recetas`)
       .then((response) => {
         const recetas = response.data;
-        console.log(recetas);
         setAllRecetas(recetas);
       })
       .catch((error) => {
@@ -37,25 +27,33 @@ function HomePage() {
 
   return (
     <div>
-      <h1 className="text-center mb-4 mt-4" >En HomePage</h1>
+      <h1 className="text-center mb-4 mt-4">En HomePage</h1>
 
       <Container>
-        <Row xs={1} md={2} lg={3} xl={4}>
-        {allRecetas.map((recipe) => (
-                  <Col key={recipe._id}>
-                      <Card className="mb-3" style={{ width: "100%" }}>
-                    <Card.Img variant="top" src={recipe.imagen} />
-                    <Card.Body>
-                      <Card.Title>
-                        <h2>{recipe.nombre}</h2>
-                      </Card.Title>
-                    </Card.Body>
-                    <Card.Body>
-                       {isLoggedIn === false ?  (<NavLink to={`/IniciarSesion`}>Ver detalles</NavLink>) :  isLoggedIn === true && (<NavLink to={`/DetallesReceta/${recipe._id}`}>Ver Detalles</NavLink>)} 
-                    </Card.Body>     
-                    </Card>               
-                  </Col>  ))}
-          </Row>
+        <Row>
+          <Col>
+            <Carousel interval={2000}> {/* intervalo de 3 segundos */}
+              {allRecetas.map((recipe) => (
+                <Carousel.Item key={recipe._id}>
+                  <img
+                    className="d-block w-100"
+                    src={recipe.imagen}
+                    alt={recipe.nombre}
+                  />
+                  <Carousel.Caption>
+                    <h3>{recipe.nombre}</h3>
+                    <p>{recipe.descripcion}</p>
+                    {isLoggedIn === false ? (
+                     <NavLink to={`/IniciarSesion`} style={{ fontSize:"xxx-large",  fontWeight: "bold" }}>Ver detalles</NavLink>
+                    ) : (
+                      <NavLink to={`/DetallesReceta/${recipe._id}`} style={{ fontSize: "2rem", color: "brown",  fontWeight: "bold"}}>Ver Detalles</NavLink>
+                    )}
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          </Col>
+        </Row>
       </Container>
     </div>
   );
