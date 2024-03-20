@@ -3,7 +3,7 @@ import service from "../../services/config.services"
 
 import React from 'react'
 
-function PrivatePages() {
+function PerfilDeUsuario() {
 
     const [ dataPrivada, setDataPrivada ] = useState(null)
 
@@ -38,8 +38,8 @@ function PrivatePages() {
   return (
     <div>
       
-      <h3>Ejemplo de página privada</h3>
-      <p>Solo usuarios que hayan validado credenciales deberian poder acceder</p>
+      <h1 className="text-center mb-4 mt-4">Perfil Privado</h1>
+<h4>Aqui tengo que ver los detalles del usuario, modificar y eliminar </h4>
 
       {dataPrivada.data}
       
@@ -48,4 +48,4 @@ function PrivatePages() {
   )
 }
 
-export default PrivatePages
+export default PerfilDeUsuario

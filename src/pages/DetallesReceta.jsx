@@ -3,28 +3,49 @@ import axios from "axios";
 import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Toast } from "react-bootstrap";
 import AñadirComentario from "../components/AñadirOpiniones";
+import MostrarOpiniones from '../components/MostrarOpiniones';
 
 function DetallesReceta() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [recetaDetalle, setReceta] = useState(null);
+  const [opiniones, setOpiniones] = useState(null);
   const { recetasId } = useParams();
+
+  const recetaId = recetasId;
+
+  // console.log(recetaId);
+
+  // console.log(recetasId);
+  
+  
 
   useEffect(() => {
     axios
       .get(`http://localhost:5005/api/recetas/${recetasId}`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
+        console.log("patata");
         setReceta(response.data);
-        setLoading(false);
+        setLoading(false);        
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error("Error al obtener comentario:", error));
+      // axios
+      //     .get(`http://localhost:5005/api/recetas/${recetasId}/opiniones`)
+      //     .then((responseOpiniones) => {
+      //       console.log("patata2");
+      //       // console.log(responseOpiniones.data);
+      //       setOpiniones(responseOpiniones.data);
+      //     })
+      //     .catch((errorOpiniones) =>
+      //       console.log("Error al obtener opiniones:", errorOpiniones)
+      //     );
   }, [recetasId]);
 
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:5005/api/recetas/${recetasId}`);
-      navigate("/"); // Redirigir a la página de inicio después de eliminar la receta
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -75,13 +96,10 @@ function DetallesReceta() {
                     ))}
                   </ol>
                 </Card.Body>
-                <Card.Body>
-                  <AñadirComentario />
-                </Card.Body>
-                <Container className="d-flex justify-content-between">
+                <Container className="d-flex justify-content-between align-items-center">
                   <Button
-                    variant="outline-secondary"
-                    size="lg"
+                    variant="outline-danger"
+                    size="s"
                     type="submit"
                     onClick={handleDelete}
                   >
@@ -103,14 +121,14 @@ function DetallesReceta() {
                   </Button>
 
                   <Link to={`/EditarReceta/${recetasId}`}>
-                    <Button variant="outline-secondary" size="lg">
+                    <Button variant="outline-warning" size="s">
                       Editar
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
-                        stroke="currentColor"
+                        stroke="darkgoldenrod"
                         className="w-6 h-6"
                       >
                         <path
@@ -122,6 +140,12 @@ function DetallesReceta() {
                     </Button>
                   </Link>
                 </Container>
+                <Card.Body>
+                  <AñadirComentario />
+                </Card.Body>    
+                <Card.Body>
+                <MostrarOpiniones />
+                </Card.Body>                          
               </Card>
             </Col>
           )}

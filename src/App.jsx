@@ -14,7 +14,8 @@ import NotFound from "./pages/error/NotFound";
 import ServerError from "./pages/error/ServerError";
 import Buscador from "./components/Buscador";
 import IsPrivate from "./components/IsPrivate";
-import PrivatePages from "./pages/error/PrivatePages";
+import PerfilDeUsuario from './pages/error/PerfilDeUsuario';
+
 
 function App() {
   return (
@@ -36,10 +37,10 @@ function App() {
         <Route path={"/IniciarSesion"} element={<IniciarSesion />} />
         <Route path={"/Registro"} element={<Registro />} />
         <Route
-          path={"/Private-pages"}
+          path={"/PerfilDeUsuario"}
           element={
             <IsPrivate>
-              <PrivatePages />
+              <PerfilDeUsuario />
             </IsPrivate>
           }
         />

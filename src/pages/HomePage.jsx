@@ -13,6 +13,7 @@ function HomePage() {
   const { authenticateUser, isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
+    
     axios
       .get(`http://localhost:5005/api/recetas`)
       .then((response) => {
