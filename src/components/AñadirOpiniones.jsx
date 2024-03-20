@@ -44,6 +44,7 @@ const AñadirOpiniones = () => {
               <Form.Control
                 as="textarea"
                 style={{ height: '120px' }}
+                className="pt-5"
                 value={comentario}
                 onChange={(e) => setOpinion(e.target.value)}
                 required
@@ -55,6 +56,7 @@ const AñadirOpiniones = () => {
             <FloatingLabel controlId="valoracion" label="Valoración">
               <Form.Control
                 type="number"
+                className="pt-5"
                 value={valoracion}
                 onChange={(e) => setValoracion(e.target.value)}
                 min={1}

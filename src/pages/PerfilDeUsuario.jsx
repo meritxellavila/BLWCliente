@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import service from "../../services/config.services"
+import service from "../services/config.services"
 
 import React from 'react'
 

@@ -14,7 +14,7 @@ import NotFound from "./pages/error/NotFound";
 import ServerError from "./pages/error/ServerError";
 import Buscador from "./components/Buscador";
 import IsPrivate from "./components/IsPrivate";
-import PerfilDeUsuario from './pages/error/PerfilDeUsuario';
+import PerfilDeUsuario from './pages/PerfilDeUsuario';
 
 
 function App() {

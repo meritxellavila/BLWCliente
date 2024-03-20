@@ -20,7 +20,7 @@ function MostrarOpiniones() {
     axios
       .get(`http://localhost:5005/api/opiniones/recetas/${recetasId}/opiniones`)
       .then((responseOpiniones) => {
-        console.log("patata2");
+        // console.log("patata2");
         console.log(responseOpiniones.data);
         setOpiniones(responseOpiniones.data);
       })
