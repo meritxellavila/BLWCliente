@@ -55,7 +55,7 @@ function AñadirReceta() {
   
       setIsUploading(false); // to stop the loading animation
     } catch (error) {
-      navigate("/*");
+      navigate("/");
     }
   };
 
