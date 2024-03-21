@@ -32,6 +32,7 @@ const AñadirOpiniones = (props) => {
       setValoracion(1);
     } catch (error) {
       console.error('Error añadiendo opinion:', error);
+      navigate("/*");
     }
   };
 

@@ -22,7 +22,7 @@ function HomePage() {
       })
       .catch((error) => {
         console.log(error);
-        navigate("/error");
+        navigate("/*");
       });
   }, []);
 

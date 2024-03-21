@@ -49,6 +49,7 @@ const opinionsList = () =>{
       navigate("/");
     } catch (error) {
       console.error(error);
+      navigate("/*");
     }
   };
 

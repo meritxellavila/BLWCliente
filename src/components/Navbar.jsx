@@ -2,10 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
-// import HomePage from '../assets/pages/HomePage';
-// import Registro from '../pages/Registro';
-// import IniciarSesion from '../assets/pages/IniciarSesion';
-// import AñadirReceta from '../pages/AñadirReceta'
+
 
 function Navbar() {
   const { authenticateUser, isLoggedIn } = useContext(AuthContext);

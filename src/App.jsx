@@ -10,12 +10,16 @@ import Favoritos from "./pages/Favoritos";
 import HomePage from "./pages/HomePage";
 import IniciarSesion from "./pages/auth/IniciarSesion";
 import Registro from "./pages/auth/Registro";
-import NotFound from "./pages/error/NotFound";
-import ServerError from "./pages/error/ServerError";
 import Buscador from "./components/Buscador";
 import IsPrivate from "./components/IsPrivate";
 import PerfilDeUsuario from './pages/PerfilDeUsuario';
 import ListarRecetasUsuario from "./components/ListarRecetasUsuario";
+
+
+//ERROR
+import NotFound from "./pages/error/NotFound";
+import ServerError from "./pages/error/ServerError";
+
 
 
 function App() {
@@ -27,13 +31,6 @@ function App() {
       <hr />
 
       <Routes>
-         {/* <Route path={"/AñadirReceta"} element={<AñadirReceta />} />
-        <Route
-          path={"/DetallesReceta/:recetasId"}
-          element={<DetallesReceta />}
-        />
-        <Route path={"/EditarReceta/:recetasId"} element={<EditarReceta />} />
-        <Route path={"/Favoritos"} element={<Favoritos />} /> */}
         <Route path={"/"} element={<HomePage />} />
         <Route path={"/IniciarSesion"} element={<IniciarSesion />} />
         <Route path={"/Registro"} element={<Registro />} />

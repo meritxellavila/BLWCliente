@@ -16,7 +16,7 @@ function AñadirReceta() {
   // const [imagen, setImagen] = useState("");s
   const [pasos, setPasos] = useState("");
   const [ingredientes, setIngredientes] = useState("");
-  const [creadoPor, setCreadoPor] = useState("");
+  // const [creadoPor, setCreadoPor] = useState("");
 
 
   const [imagen, setImageUrl] = useState(null);
@@ -28,11 +28,7 @@ function AñadirReceta() {
     setNombre(inputNombre);
   };
 
-  // const handleImagen = (event) => {
-  //   let inputImagen = event.target.value;
-  //   setImagen(inputImagen);
-  // };
-
+  //cloudinary
   const handleFileUpload = async (event) => {
     console.log("The file to be uploaded is: ", event.target.files[0]);
   
@@ -59,7 +55,7 @@ function AñadirReceta() {
   
       setIsUploading(false); // to stop the loading animation
     } catch (error) {
-      navigate("/error");
+      navigate("/*");
     }
   };
 
@@ -76,11 +72,11 @@ function AñadirReceta() {
     setIngredientes(inputIngredientes);
   };
 
-  const handleCreadoPor = (event) => {
-    let inputCreadoPor = event.target.value;
-    //console.log(inputCreadoPor);
-    setCreadoPor(inputCreadoPor);
-  };
+  // const handleCreadoPor = (event) => {
+  //   let inputCreadoPor = event.target.value;
+  //   //console.log(inputCreadoPor);
+  //   setCreadoPor(inputCreadoPor);
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -91,7 +87,7 @@ function AñadirReceta() {
       imagen: imagen,
       pasos: pasos,
       ingredientes: ingredientes,
-      creadoPor: creadoPor,
+      // creadoPor: creadoPor,
     };
 
     try {
@@ -106,7 +102,7 @@ function AñadirReceta() {
       setPasos("");
       setImageUrl();
       setIngredientes("");
-      setCreadoPor("");
+      // setCreadoPor("");
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -143,7 +139,7 @@ function AñadirReceta() {
             />
           </FloatingLabel>
 
-          <FloatingLabel
+          {/* <FloatingLabel
             controlId="creadoPor"
             label="Creado Por"
             className="mb-3"
@@ -153,7 +149,7 @@ function AñadirReceta() {
               value={creadoPor}
               onChange={handleCreadoPor}
             />
-          </FloatingLabel>
+          </FloatingLabel> */}
           {isUploading ? <h3>... uploading image</h3> : null}
           {imagen ? (<div><img src={imagen} alt="img" width={200} /></div>) : null}
 
