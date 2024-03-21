@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Form, Button, FloatingLabel, Container, Card } from "react-bootstrap";
 import { AuthContext } from '../context/auth.context';
-
+import service from '../services/config.services';
 
 const AñadirOpiniones = (props) => {
   console.log({props});
@@ -19,7 +19,7 @@ const AñadirOpiniones = (props) => {
     e.preventDefault();
     console.log( comentario,valoracion,recetasId );
     try {
-     const response = await axios.post(`http://localhost:5005/api/opiniones`, {
+    const response =   await service.post(`/opiniones`, {
               comentario: comentario,
               valoracion: valoracion,
               recetaId: recetasId,

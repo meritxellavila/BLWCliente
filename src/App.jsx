@@ -15,6 +15,7 @@ import ServerError from "./pages/error/ServerError";
 import Buscador from "./components/Buscador";
 import IsPrivate from "./components/IsPrivate";
 import PerfilDeUsuario from './pages/PerfilDeUsuario';
+import ListarRecetasUsuario from "./components/ListarRecetasUsuario";
 
 
 function App() {
@@ -78,40 +79,13 @@ function App() {
             </IsPrivate>
           }
         />
-        
-        {/* <Route
-          path={"/AñadirReceta"}
-          element={
+      <Route path= {"/ListarRecetasUsuario"} element={
             <IsPrivate>
-              <AñadirReceta />
+              <ListarRecetasUsuario />
             </IsPrivate>
           }
-        /> */}
-        {/* <Route
-          path={"/DetallesReceta "}
-          element={
-            <IsPrivate>
-              <DetallesReceta />
-            </IsPrivate>
-          }
-        /> */}
-        {/* <Route
-          path={"/EditarReceta"}
-          element={
-            <IsPrivate>
-            
-              <EditarReceta />
-            </IsPrivate>
-          }
-        /> */}
-        {/* <Route
-          path={"/Favoritos"}
-          element={
-            <IsPrivate>
-              <Favoritos />
-            </IsPrivate>
-          }
-        /> */}
+        />
+
         <Route path={"/*"} element={<NotFound />} /> //404
         <Route path={"/ServerError"} element={<ServerError />} /> //500
       </Routes>

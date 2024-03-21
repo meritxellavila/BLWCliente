@@ -5,6 +5,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import service from '../services/config.services';
 
 
 
@@ -18,7 +19,7 @@ function AñadirReceta() {
   const [creadoPor, setCreadoPor] = useState("");
 
 
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imagen, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleNombre = (event) => {
@@ -33,7 +34,7 @@ function AñadirReceta() {
   // };
 
   const handleFileUpload = async (event) => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
+    console.log("The file to be uploaded is: ", event.target.files[0]);
   
     if (!event.target.files[0]) {
       // to prevent accidentally clicking the choose file button and not selecting a file
@@ -48,12 +49,12 @@ function AñadirReceta() {
     //     this name needs to match the name used in the middleware in the backend => uploader.single("image")
   
     try {
-      const response = await axios.post("http://localhost:5005/api/upload", uploadData)
+      const response = await service.post("http://localhost:5005/api/upload", uploadData)
       // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
       console.log(response);
       
       setImageUrl(response.data.imageUrl);
-      //                          |
+      
       //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
   
       setIsUploading(false); // to stop the loading animation
@@ -87,14 +88,14 @@ function AñadirReceta() {
     const newReceta = {
       nombre: nombre,
       // imagen: imagen,
-      image: imageUrl,
+      imagen: imagen,
       pasos: pasos,
       ingredientes: ingredientes,
       creadoPor: creadoPor,
     };
 
     try {
-      const response = await axios.post(
+      const response = await service.post(
         `http://localhost:5005/api/recetas`,
         newReceta
       );
@@ -123,7 +124,7 @@ function AñadirReceta() {
           </FloatingLabel>
 
           <FloatingLabel controlId="image" label="Image" className="mb-3">
-            <Form.Control type="text" value={imageUrl} onChange={handleFileUpload} disabled={isUploading} />
+            <Form.Control type="file" onChange={handleFileUpload} disabled={isUploading} />
           </FloatingLabel>
 
           <FloatingLabel controlId="pasos" label="Pasos" className="mb-3">
@@ -154,7 +155,7 @@ function AñadirReceta() {
             />
           </FloatingLabel>
           {isUploading ? <h3>... uploading image</h3> : null}
-          {imageUrl ? (<div><img src={imageUrl} alt="img" width={200} /></div>) : null}
+          {imagen ? (<div><img src={imagen} alt="img" width={200} /></div>) : null}
 
 
           <Button disabled={isUploading} variant="outline-secondary" size="lg" type="submit">

@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Container, Form, FloatingLabel, Button } from "react-bootstrap";
 import axios from "axios";
 import {AuthContext} from "../../context/auth.context"
+import service from "../../services/config.services";
 
 import { useNavigate } from "react-router-dom";
 
@@ -41,7 +42,7 @@ function IniciarSesion() {
 
     try {
       // 1. validar credenciales del usuario
-      const response = await axios.post(`http://localhost:5005/api/auth/login`, credentials);
+      const response = await service.post(`/auth/login`, credentials);
 
       // 2. almacenamos el token de forma segura en localStorage
       localStorage.setItem("authToken", response.data.authToken);
