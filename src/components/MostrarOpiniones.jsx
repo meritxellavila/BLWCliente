@@ -3,31 +3,44 @@ import axios from "axios";
 import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Toast } from "react-bootstrap";
 
-function MostrarOpiniones() {
+function MostrarOpiniones(props) {
+  console.log("MostrarOpiniones", props);
+  
   const [loading, setLoading] = useState(true);
   //   const [recetaDetalle, setReceta] = useState(null);
   const [opiniones, setOpiniones] = useState([]);
 
   const { recetasId } = useParams();
+ 
+const opinionsList = () =>{
+  console.log("estoy en opinionList");
+  
+  axios
+  .get(`http://localhost:5005/api/opiniones/recetas/${recetasId}/opiniones`)
+  .then((responseOpiniones) => {
+    // console.log("patata2");
+    console.log(responseOpiniones.data);
+    setOpiniones(responseOpiniones.data);
+    
+  })
+  .catch((errorOpiniones) =>
+    console.log("Error al obtener opiniones:", errorOpiniones)
 
-//   const recetaId = recetasId;
+  );
+}
 
-  // console.log(recetaId);
-
-  // console.log(recetasId);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5005/api/opiniones/recetas/${recetasId}/opiniones`)
-      .then((responseOpiniones) => {
-        // console.log("patata2");
-        console.log(responseOpiniones.data);
-        setOpiniones(responseOpiniones.data);
-      })
-      .catch((errorOpiniones) =>
-        console.log("Error al obtener opiniones:", errorOpiniones)
-      );
-  }, [recetasId]);
+    if (props.createNewOpinion){
+      opinionsList()//solo cuando createNewOpinion = true 
+    }
+   
+  }, [props.createNewOpinion]);//dependencia solo true y en la primera carga 
+
+  useEffect(() => {
+    opinionsList()
+  }, []);// al cargar consulta
+
 
   return (
     <div>

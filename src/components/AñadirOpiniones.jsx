@@ -5,7 +5,9 @@ import { Form, Button, FloatingLabel, Container, Card } from "react-bootstrap";
 import { AuthContext } from '../context/auth.context';
 
 
-const AñadirOpiniones = () => {
+const AñadirOpiniones = (props) => {
+  console.log({props});
+  
   const { loggedUserId } = useContext(AuthContext);
   const { recetasId } = useParams();
   const [comentario, setOpinion] = useState('');
@@ -24,7 +26,7 @@ const AñadirOpiniones = () => {
             });      
       
       console.log(response);
-      
+      props.setCreateNewOpinion(true)
 
       setOpinion('');
       setValoracion(1);

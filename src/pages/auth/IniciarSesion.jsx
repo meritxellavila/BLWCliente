@@ -50,7 +50,7 @@ function IniciarSesion() {
       await authenticateUser();
 
       // 4 redireccionar a pagina privada
-      navigate("/private-pages");
+      navigate("/PerfilDeUsuario");
 
     } catch (error) {
       console.error(error);

@@ -2,23 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Toast } from "react-bootstrap";
-import AñadirComentario from "../components/AñadirOpiniones";
-import MostrarOpiniones from '../components/MostrarOpiniones';
+import AñadirOpiniones from "../components/AñadirOpiniones";
+import MostrarOpiniones from "../components/MostrarOpiniones";
 
 function DetallesReceta() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [recetaDetalle, setReceta] = useState(null);
-  const [opiniones, setOpiniones] = useState(null);
+  const [createNewOpinion, setCreateNewOpinion]=useState(false)
   const { recetasId } = useParams();
-
-  const recetaId = recetasId;
-
-  // console.log(recetaId);
-
-  // console.log(recetasId);
-  
-  
+console.log({createNewOpinion});
 
   useEffect(() => {
     axios
@@ -27,19 +20,9 @@ function DetallesReceta() {
         // console.log(response.data);
         console.log("patata");
         setReceta(response.data);
-        setLoading(false);        
+        setLoading(false);
       })
       .catch((error) => console.error("Error al obtener comentario:", error));
-      // axios
-      //     .get(`http://localhost:5005/api/recetas/${recetasId}/opiniones`)
-      //     .then((responseOpiniones) => {
-      //       console.log("patata2");
-      //       // console.log(responseOpiniones.data);
-      //       setOpiniones(responseOpiniones.data);
-      //     })
-      //     .catch((errorOpiniones) =>
-      //       console.log("Error al obtener opiniones:", errorOpiniones)
-      //     );
   }, [recetasId]);
 
   const handleDelete = async () => {
@@ -141,11 +124,11 @@ function DetallesReceta() {
                   </Link>
                 </Container>
                 <Card.Body>
-                  <AñadirComentario />
-                </Card.Body>    
+                  <AñadirOpiniones setCreateNewOpinion={setCreateNewOpinion} />
+                </Card.Body>
                 <Card.Body>
-                <MostrarOpiniones />
-                </Card.Body>                          
+                  <MostrarOpiniones createNewOpinion={createNewOpinion} setCreateNewOpinion={setCreateNewOpinion} />
+                </Card.Body>
               </Card>
             </Col>
           )}

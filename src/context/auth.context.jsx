@@ -22,6 +22,8 @@ function AuthWrapper(props) {
       const response = await axios.get("http://localhost:5005/api/auth/verify", { headers: { authorization: `Bearer ${storedToken}` } })
       
       // Si este punto del codigo ocurre, significa que el token es valido. permitimos acceso
+      console.log(response);
+      
       setIsLoggedIn(true)
       setLoggedUserId(response.data._id) // el id del usuario segun el payload del token
 
