@@ -6,14 +6,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
+
+
 function AñadirReceta() {
   const navigate = useNavigate();
 
   const [nombre, setNombre] = useState("");
-  const [imagen, setImagen] = useState("");
+  // const [imagen, setImagen] = useState("");s
   const [pasos, setPasos] = useState("");
   const [ingredientes, setIngredientes] = useState("");
   const [creadoPor, setCreadoPor] = useState("");
+
+
+  const [imageUrl, setImageUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleNombre = (event) => {
     let inputNombre = event.target.value;
@@ -21,14 +27,45 @@ function AñadirReceta() {
     setNombre(inputNombre);
   };
 
-  const handleImagen = (event) => {
-    let inputImagen = event.target.value;
-    setImagen(inputImagen);
+  // const handleImagen = (event) => {
+  //   let inputImagen = event.target.value;
+  //   setImagen(inputImagen);
+  // };
+
+  const handleFileUpload = async (event) => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+  
+    if (!event.target.files[0]) {
+      // to prevent accidentally clicking the choose file button and not selecting a file
+      return;
+    }
+  
+    setIsUploading(true); // to start the loading animation
+  
+    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    uploadData.append("image", event.target.files[0]);
+    //                   |
+    //     this name needs to match the name used in the middleware in the backend => uploader.single("image")
+  
+    try {
+      const response = await axios.post("http://localhost:5005/api/upload", uploadData)
+      // !IMPORTANT: Adapt the request structure to the one in your proyect (services, .env, auth, etc...)
+      console.log(response);
+      
+      setImageUrl(response.data.imageUrl);
+      //                          |
+      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
+  
+      setIsUploading(false); // to stop the loading animation
+    } catch (error) {
+      navigate("/error");
+    }
   };
+
 
   const handlePasos = (event) => {
     let inputPasos = event.target.value;
-   // console.log(inputPasos);
+    // console.log(inputPasos);
     setPasos(inputPasos);
   };
 
@@ -49,20 +86,24 @@ function AñadirReceta() {
 
     const newReceta = {
       nombre: nombre,
-      imagen: imagen,
+      // imagen: imagen,
+      image: imageUrl,
       pasos: pasos,
       ingredientes: ingredientes,
       creadoPor: creadoPor,
     };
 
     try {
-      const response = await axios.post(`http://localhost:5005/api/recetas`, newReceta);
+      const response = await axios.post(
+        `http://localhost:5005/api/recetas`,
+        newReceta
+      );
 
       console.log(response);
 
       setNombre("");
       setPasos("");
-      setImagen("");
+      setImageUrl();
       setIngredientes("");
       setCreadoPor("");
       navigate("/");
@@ -81,8 +122,8 @@ function AñadirReceta() {
             <Form.Control type="text" value={nombre} onChange={handleNombre} />
           </FloatingLabel>
 
-          <FloatingLabel controlId="imagen" label="URL Imagen" className="mb-3">
-            <Form.Control type="text" value={imagen} onChange={handleImagen} />
+          <FloatingLabel controlId="image" label="Image" className="mb-3">
+            <Form.Control type="text" value={imageUrl} onChange={handleFileUpload} disabled={isUploading} />
           </FloatingLabel>
 
           <FloatingLabel controlId="pasos" label="Pasos" className="mb-3">
@@ -112,8 +153,11 @@ function AñadirReceta() {
               onChange={handleCreadoPor}
             />
           </FloatingLabel>
+          {isUploading ? <h3>... uploading image</h3> : null}
+          {imageUrl ? (<div><img src={imageUrl} alt="img" width={200} /></div>) : null}
 
-          <Button variant="outline-secondary" size="lg" type="submit">
+
+          <Button disabled={isUploading} variant="outline-secondary" size="lg" type="submit">
             Añadir
           </Button>
         </Form>
