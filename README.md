@@ -18,7 +18,7 @@ Este proyecto presenta una colección de recetas adaptadas para Baby Led Weaning
 
 ## Funcionalidades pendientes
 
-**NOTE -** Agregar favoritos.
+Agregar favoritos, separar por categorias segun los meses del bebe.
 
 
 # Estructura del cliente
@@ -48,7 +48,7 @@ Este proyecto presenta una colección de recetas adaptadas para Baby Led Weaning
 
 ## Client Routes
 
-**NOTE -** Use below table to list your frontend routes
+**NOTE -** Use below table to list your frontend routess
 
 ## React Router Routes (React App)
 | Path                      | Page            | Components        | Permissions              | Behavior                                                      |
