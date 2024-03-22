@@ -126,7 +126,7 @@ function Navbar() {
           </svg>
         </NavLink>
       )}
-
+{/* 
       {isLoggedIn === true && (
         <NavLink className={navChek} to="/Favoritos">
           <svg
@@ -144,7 +144,7 @@ function Navbar() {
             />
           </svg>
         </NavLink>
-      )}
+      )} */}
 
       {isLoggedIn === true && (
         <button className="logout-button" onClick={handleLogout}>

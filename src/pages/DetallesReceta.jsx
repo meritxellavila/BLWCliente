@@ -4,7 +4,7 @@ import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Toast } from "react-bootstrap";
 import AñadirOpiniones from "../components/AñadirOpiniones";
 import MostrarOpiniones from "../components/MostrarOpiniones";
-import Favoritos from '../pages/Favoritos';
+// import Favoritos from '../pages/Favoritos';
 
 function DetallesReceta(props) {
   console.log("DetallesReceta", props);
@@ -110,7 +110,7 @@ console.log(recetaId);
                     </svg>
                   </Button> */}
 
-                  <Link to={`/Favoritos`}>
+                  {/* <Link to={`/Favoritos`}>
                     <Button variant="outline-warning" size="s">
                       Favoritos
                       <svg
@@ -128,7 +128,7 @@ console.log(recetaId);
                         />
                       </svg>
                     </Button>
-                  </Link>
+                  </Link> */}
                 {/* </Container> */}
                 <Card.Body>
                   <AñadirOpiniones setCreateNewOpinion={setCreateNewOpinion} />
@@ -141,7 +141,7 @@ console.log(recetaId);
           )}
         </Row>
       </Container>
-      <Favoritos recetaId={recetasId} />
+      {/* <Favoritos recetaId={recetasId} /> */}
     </div>
   );
 }

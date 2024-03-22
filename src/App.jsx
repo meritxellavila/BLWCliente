@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar";
 import AñadirReceta from "./pages/AñadirReceta";
 import DetallesReceta from "./pages/DetallesReceta";
 import EditarReceta from "./pages/EditarReceta";
-import Favoritos from "./pages/Favoritos";
+// import Favoritos from "./pages/Favoritos";
 import HomePage from "./pages/HomePage";
 import IniciarSesion from "./pages/auth/IniciarSesion";
 import Registro from "./pages/auth/Registro";
@@ -59,14 +59,14 @@ function App() {
           }
         />
 
-      <Route
+      {/* <Route
           path={"/Favoritos"}
           element={
             <IsPrivate>
               <Favoritos />
             </IsPrivate>
           }
-        />
+        /> */}
 
         <Route
           path={"/AñadirReceta"}
