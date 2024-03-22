@@ -10,7 +10,6 @@ import EditarReceta from "./pages/EditarReceta";
 import HomePage from "./pages/HomePage";
 import IniciarSesion from "./pages/auth/IniciarSesion";
 import Registro from "./pages/auth/Registro";
-import Buscador from "./components/Buscador";
 import IsPrivate from "./components/IsPrivate";
 import PerfilDeUsuario from './pages/PerfilDeUsuario';
 import ListarRecetasUsuario from "./components/ListarRecetasUsuario";
@@ -26,7 +25,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Buscador />
+
 
       <hr />
 

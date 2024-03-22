@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import service from '../services/config.services';
 
 
+
 function EditarReceta() {
     const navigate = useNavigate();
     const { recetasId } = useParams();
@@ -49,7 +50,7 @@ function EditarReceta() {
     };
 
     useEffect(() => {
-        service.get(`http://localhost:5005/api/recetas/${recetasId}`)
+        service.get(`/recetas/${recetasId}`)
             .then((response) => {
                 console.log(response);
                 

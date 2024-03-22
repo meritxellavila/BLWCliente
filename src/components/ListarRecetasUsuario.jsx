@@ -24,6 +24,7 @@ function ListarRecetasUsuario() {
         setLoading(false);
       } catch (error) {
         console.error("Error al obtener receta por Id de Usuario:", error);
+    
       }
     };
 
@@ -32,12 +33,12 @@ function ListarRecetasUsuario() {
 
   const handelDelete = async (recetasId) => {
     try {
-      await axios.delete(`http://localhost:5005/api/recetas/${recetasId}`);
+      await service.delete(`/recetas/${recetasId}`);
       opinionsList();
       navigate("/");
     } catch (error) {
       console.error(error);
-      navigate("/*");
+      navigate("/");
     }
   };
 
@@ -68,8 +69,13 @@ function ListarRecetasUsuario() {
       </Row>
       </Container>
       <Container>
-        <Row>
-        {filtradoRecetas.map((receta) => (
+      <Row>
+          {recetasUsuario.length === 0 ? (
+            <div className="alert alert-info mt-5" role="alert">
+            <h4 className="text-center">No tienes recetas para mostrar</h4>
+          </div>
+          ) : (
+            filtradoRecetas.map((receta) => (
             <Col key={receta._id}>
               <Card className="mb-3 mt-4" style={{ fontSize: "1.2rem" }}>
                 <Card.Body>
@@ -150,7 +156,8 @@ function ListarRecetasUsuario() {
                 </Card.Body>
               </Card>
             </Col>
-          ))}
+            ))
+          )}
         </Row>
       </Container>
     </div>

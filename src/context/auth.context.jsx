@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import service from '../services/config.services';
 
 // 1. componente que transmite el contexto
 const AuthContext = createContext()
@@ -19,7 +20,7 @@ function AuthWrapper(props) {
     try {
       
       // verificar validez del token
-      const response = await axios.get("http://localhost:5005/api/auth/verify", { headers: { authorization: `Bearer ${storedToken}` } })
+      const response = await service.get("/auth/verify", { headers: { authorization: `Bearer ${storedToken}` } })
       
       // Si este punto del codigo ocurre, significa que el token es valido. permitimos acceso
       console.log(response);

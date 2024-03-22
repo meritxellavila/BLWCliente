@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Container, Form, FloatingLabel, Button } from "react-bootstrap";
-import axios from "axios";
 import {AuthContext} from "../../context/auth.context"
 import service from "../../services/config.services";
 

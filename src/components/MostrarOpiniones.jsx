@@ -2,34 +2,27 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Toast } from "react-bootstrap";
+import service from '../services/config.services';
 
 function MostrarOpiniones(props) {
   console.log("MostrarOpiniones", props);
   
   const [loading, setLoading] = useState(true);
-  //   const [recetaDetalle, setReceta] = useState(null);
   const [opiniones, setOpiniones] = useState([]);
 
 
   const { recetasId } = useParams();
  
-const opinionsList = () =>{
+const opinionsList = async  () =>{
   console.log("estoy en opinionList");
-  
-  axios
-  .get(`http://localhost:5005/api/opiniones/recetas/${recetasId}/opiniones`)
-  .then((responseOpiniones) => {
-    // console.log("patata2");
+  try {
+    const responseOpiniones = await service.get(`/opiniones/recetas/${recetasId}/opiniones`);
     console.log(responseOpiniones.data);
     setOpiniones(responseOpiniones.data);
-    
-  })
-  .catch((errorOpiniones) =>
-    console.log("Error al obtener opiniones:", errorOpiniones)
-
-  );
-}
-
+  } catch (errorOpiniones) {
+    console.log("Error al obtener opiniones:", errorOpiniones);
+  }
+};
 
   useEffect(() => {
     if (props.createNewOpinion){
@@ -40,11 +33,11 @@ const opinionsList = () =>{
 
   useEffect(() => {
     opinionsList()
-  }, []);// al cargar consulta
+  }, []);
 
   const handelDelete = async (opinionesId) => {
     try {
-      await axios.delete(`http://localhost:5005/api/opiniones/${opinionesId}`);
+      await service.delete(`/opiniones/${opinionesId}`);
       opinionsList();
       navigate("/");
     } catch (error) {

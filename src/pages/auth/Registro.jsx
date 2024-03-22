@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import service from "../../services/config.services";
 
@@ -43,10 +42,10 @@ function Registro() {
       };
 
   try {
-    await axios.post(`http://localhost:5005/api/auth/signup`, newUsuario);
+    await service.post(`/auth/signup`, newUsuario);
      
  
-      navigate("/IniciarSesion")//ruta de FE
+      navigate("/IniciarSesion")
 
       setName('');
       setEmail('');

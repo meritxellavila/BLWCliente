@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Carousel } from "react-bootstrap";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
+import service from '../services/config.services';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -13,17 +13,19 @@ function HomePage() {
   const { authenticateUser, isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
-    
-    axios
-      .get(`http://localhost:5005/api/recetas`)
-      .then((response) => {
+    const homeData = async () => {
+      try {
+        const response = await service.get(`/recetas`);
         const recetas = response.data;
         setAllRecetas(recetas);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error);
         navigate("/*");
-      });
+      }
+    };
+
+    homeData ();
+    return () => {};
   }, []);
 
   return (

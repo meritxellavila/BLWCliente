@@ -4,7 +4,9 @@ import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Toast } from "react-bootstrap";
 import AñadirOpiniones from "../components/AñadirOpiniones";
 import MostrarOpiniones from "../components/MostrarOpiniones";
+import service from '../services/config.services';
 // import Favoritos from '../pages/Favoritos';
+
 
 function DetallesReceta(props) {
   console.log("DetallesReceta", props);
@@ -18,22 +20,26 @@ console.log({createNewOpinion});
 const recetaId = recetasId; 
 console.log(recetaId);
 
+useEffect(() => {
+  const RecetasData = async () => {
+    try {
+      const response = await service.get(`/recetas/${recetasId}`);
+      // console.log(response.data);
+      console.log("patata");
+      setReceta(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error al obtener comentario:", error);
+    }
+  };
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5005/api/recetas/${recetasId}`)
-      .then((response) => {
-        // console.log(response.data);
-        console.log("patata");
-        setReceta(response.data);
-        setLoading(false);
-      })
-      .catch((error) => console.error("Error al obtener comentario:", error));
-  }, [recetasId]);
+  RecetasData();
+  return () => {};
+}, [recetasId]);
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5005/api/recetas/${recetasId}`);
+      await service.delete(`/recetas/${recetasId}`);
       navigate("/");
     } catch (error) {
       console.error(error);
