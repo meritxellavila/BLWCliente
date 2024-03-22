@@ -66,7 +66,10 @@ function AñadirReceta() {
 
       setIsUploading(false);
     } catch (error) {
-      navigate("/");
+      console.log(error);
+      navigate("/ServerError");
+      
+      
     }
   };
 
