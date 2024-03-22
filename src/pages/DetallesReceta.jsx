@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
-import { Card, Button, Container, Row, Col, Toast, CardBody } from "react-bootstrap";
+import { Card, Button, Container, Row, Col, Toast } from "react-bootstrap";
 import AñadirOpiniones from "../components/AñadirOpiniones";
 import MostrarOpiniones from "../components/MostrarOpiniones";
-import Favoritos from "./Favoritos";
+import Favoritos from '../pages/Favoritos';
 
-function DetallesReceta() {
+function DetallesReceta(props) {
+  console.log("DetallesReceta", props);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [recetaDetalle, setReceta] = useState(null);
   const [createNewOpinion, setCreateNewOpinion]=useState(false)
   const { recetasId } = useParams();
 console.log({createNewOpinion});
+
+const recetaId = recetasId; 
+console.log(recetaId);
+
 
   useEffect(() => {
     axios
@@ -105,9 +110,9 @@ console.log({createNewOpinion});
                     </svg>
                   </Button> */}
 
-                  {/* <Link to={`/EditarReceta/${recetasId}`}>
+                  <Link to={`/Favoritos`}>
                     <Button variant="outline-warning" size="s">
-                      Editar
+                      Favoritos
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -123,11 +128,8 @@ console.log({createNewOpinion});
                         />
                       </svg>
                     </Button>
-                  </Link> */}
+                  </Link>
                 {/* </Container> */}
-                <Card.Body>
-                  <Favoritos />
-                </Card.Body>
                 <Card.Body>
                   <AñadirOpiniones setCreateNewOpinion={setCreateNewOpinion} />
                 </Card.Body>
@@ -139,6 +141,7 @@ console.log({createNewOpinion});
           )}
         </Row>
       </Container>
+      <Favoritos recetaId={recetasId} />
     </div>
   );
 }

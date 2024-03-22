@@ -5,7 +5,6 @@ import {
     Button,
     Container,
 } from "react-bootstrap";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import service from '../services/config.services';
 
@@ -70,7 +69,7 @@ function EditarReceta() {
         event.preventDefault();
 
         try {
-           await service.put(`http://localhost:5005/api/recetas/porReceta/${recetasId}`, {
+           await service.put(`/recetas/porReceta/${recetasId}`, {
                 nombre: nombre,
                 imagen: imagen,
                 pasos: pasos,
