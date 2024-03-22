@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 import service from "../services/config.services";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 
 function ListarRecetasUsuario() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [recetasUsuario, setRecetaUsuario] = useState([]);
+  const [buscador, setBuscador] = useState("");
   const { loggedUserId } = useContext(AuthContext);
 
   const usuarioId = loggedUserId;
@@ -41,16 +42,34 @@ function ListarRecetasUsuario() {
   };
 
   const handleEdit = (recetasId) => {
-    // Navegar a la vista de edición de receta con el ID de la receta seleccionada
     navigate(`/EditarReceta/${recetasId}`);
   };
+
+  const handleBuscador = (event) => {
+    setBuscador(event.target.value);
+  };
+
+  const filtradoRecetas = recetasUsuario.filter((receta) =>
+    receta.nombre.toLowerCase().includes(buscador.toLowerCase())
+  );
 
   return (
     <div>
       <h2 className="mt-4">Mis recetas</h2>
       <Container>
+      <Row>
+      <Form.Control
+        type="text"
+        placeholder="Buscar entre mis recetas..."
+        value={buscador}
+        onChange={handleBuscador}
+        className="mb-4"
+      />
+      </Row>
+      </Container>
+      <Container>
         <Row>
-          {recetasUsuario.map((receta) => (
+        {filtradoRecetas.map((receta) => (
             <Col key={receta._id}>
               <Card className="mb-3 mt-4" style={{ fontSize: "1.2rem" }}>
                 <Card.Body>
