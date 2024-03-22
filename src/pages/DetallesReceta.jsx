@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, NavLink, useParams } from "react-router-dom";
-import { Card, Button, Container, Row, Col, Toast } from "react-bootstrap";
+import { Card, Button, Container, Row, Col, Toast, CardBody } from "react-bootstrap";
 import AñadirOpiniones from "../components/AñadirOpiniones";
 import MostrarOpiniones from "../components/MostrarOpiniones";
+import Favoritos from "./Favoritos";
 
 function DetallesReceta() {
   const navigate = useNavigate();
@@ -124,6 +125,9 @@ console.log({createNewOpinion});
                     </Button>
                   </Link> */}
                 {/* </Container> */}
+                <Card.Body>
+                  <Favoritos />
+                </Card.Body>
                 <Card.Body>
                   <AñadirOpiniones setCreateNewOpinion={setCreateNewOpinion} />
                 </Card.Body>

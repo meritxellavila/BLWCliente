@@ -1,11 +1,22 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Form, Button, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+// import { AuthContext } from "../context/auth.context";
+// import { useContext } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import service from '../services/config.services';
+
+import { AuthContext } from '../context/auth.context';
+import { useContext } from "react";
+
+// const { loggedUserId } = useContext(AuthContext);
+// const usuarioId = loggedUserId;
+
+// console.log(usuarioId);
+
 
 
 
@@ -14,6 +25,7 @@ function AñadirReceta() {
 
   const [nombre, setNombre] = useState("");
   // const [imagen, setImagen] = useState("");s
+  const [creadoPor, setDataPrivada] = useState(null);
   const [pasos, setPasos] = useState("");
   const [ingredientes, setIngredientes] = useState("");
   // const [creadoPor, setCreadoPor] = useState("");
@@ -21,6 +33,20 @@ function AñadirReceta() {
 
   const [imagen, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+
+  useEffect(() => {
+    getData();
+  }, []);
+  
+  const getData = async () => {
+    try {
+        const response = await service.get("http://localhost:5005/api/auth/verify");
+        console.log(response.data);
+        setDataPrivada(response.data._id);
+    } catch (error) {
+        console.log(error); 
+    }
+  }
 
   const handleNombre = (event) => {
     let inputNombre = event.target.value;
@@ -78,6 +104,11 @@ function AñadirReceta() {
   //   setCreadoPor(inputCreadoPor);
   // };
 
+  const handleData = (event) => {
+    let data = event.target.value;
+    setDataPrivada(data);
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -87,7 +118,7 @@ function AñadirReceta() {
       imagen: imagen,
       pasos: pasos,
       ingredientes: ingredientes,
-      // creadoPor: creadoPor,
+      creadoPor: creadoPor,
     };
 
     try {
@@ -136,6 +167,18 @@ function AñadirReceta() {
               type="text"
               value={ingredientes}
               onChange={handleIngredientes}
+            />
+          </FloatingLabel>
+
+          <FloatingLabel
+            controlId="creadoPor"
+            label="creado"
+            className="mb-3"
+          >
+            <Form.Control
+              type="text"
+              value={creadoPor}
+              onChange={handleData}
             />
           </FloatingLabel>
 
